@@ -26,15 +26,15 @@ export default function CardEvento({ evento, onRemover }) {
     <article
       className="card"
       style={{
-        border: "1px solid #ccc",
+        border: "1px solid #0066ff",
         borderRadius: "5px",
         padding: "1rem",
         marginBottom: "1rem",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "#1a1a1a",
-        color: "#fff"
+        background:"#7eb2ff",
+        color: "#FFF"
       }}
     >
       <div>

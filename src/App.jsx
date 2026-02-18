@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Menu from "./components/Menu";
 
 import Home from "./pages/Home";
-import Evento from "./pages/Eventos";
+import Eventos from "./pages/Eventos";
 import CadastroEvento from "./pages/CadastroEvento";
 import DetalheEvento from "./pages/DetalheEvento";
 
@@ -30,25 +30,25 @@ export default function App() {
     },
   ]);
 
-  // ➕ Adicionar novo evento
+  // Adicionar novo evento
   function adicionarEvento(novo) {
     const eventoComId = { id: Date.now(), ...novo };
     setEventos((lista) => [eventoComId, ...lista]);
   }
 
-  // ✏️ Atualizar evento existente
+  // Atualizar evento existente
   function atualizarEvento(id, dadosAtualizados) {
     setEventos((lista) =>
       lista.map((e) => e.id === id ? { ...e, ...dadosAtualizados } : e)
     );
   }
 
-  // ❌ Remover evento específico
+  // Remover evento específico
   function removerEvento(id) {
     setEventos((lista) => lista.filter((e) => e.id !== id));
   }
 
-  // ❌ Remover todos os eventos
+  // Remover todos os eventos
   function removerTodos() {
     setEventos([]);
   }
@@ -75,7 +75,7 @@ export default function App() {
           <Route
             path="/Evento"
             element={
-              <Evento
+              <Eventos
                 eventos={eventos}
                 onRemover={removerEvento}
                 onRemoverTodos={removerTodos}

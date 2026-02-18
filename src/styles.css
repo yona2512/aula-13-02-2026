@@ -1,8 +1,12 @@
 body { 
     margin: 0; 
-    font-family: Arial, sans-serif; background: #0b0f14; 
-    color: #e6edf3; 
-    }
+    font-family: Arial, sans-serif; 
+    background-image: url('/src/img/evento.jpg');
+    background-size: cover;       /* Faz a imagem ocupar toda a tela */
+    background-position: center;  /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+}
+
     .app { 
     min-height: 100vh; 
     display: flex; 
@@ -11,7 +15,7 @@ body {
     
     .header { 
     padding: 16px; 
-    border-bottom: 1px solid #1b2634; 
+    border-bottom: 1px solid #aa7d7d00; 
     }
     
     .header h1 { 
@@ -20,7 +24,7 @@ body {
     }
     .sub { 
     margin: 6px 0 0;
-    color: #9fb2c8;
+    color: #000000;
     font-size: 13px; 
     }
     
@@ -28,20 +32,20 @@ body {
     display: flex; 
     gap: 10px; 
     padding: 12px 16px; 
-    border-bottom: 1px solid #1b2634; 
+    border-bottom: 1px solid #aa887d00; 
     }
     
     .link { 
     padding: 8px 10px; 
     border-radius: 10px; 
     text-decoration: none; 
-    color: #cfe2ff; 
-    background: #111926; 
+    color: #ffffff; 
+    background: #6894e6; 
     }
     
     .link.active { 
     font-weight: bold; 
-    outline: 2px solid #243b55; 
+    outline: 2px solid #003881; 
     }
     
     .conteudo-principal { 
@@ -59,8 +63,8 @@ body {
     
     .box { 
     padding: 10px; 
-    background: #111926; 
-    border: 1px solid #1b2634; 
+    background: #ffffff; 
+    border: 1px solid #3f9bf1; 
     border-radius: 12px; 
     }
     
@@ -75,13 +79,13 @@ body {
     justify-content: space-between; 
     align-items: center; gap: 12px;
     padding: 12px; 
-    background: #0f1723; 
-    border: 1px solid #1b2634; 
+    background: #fcfdff; 
+    border: 1px solid #0478c5; 
     border-radius: 14px;
     }
     
     .muted { 
-    color: #9fb2c8; 
+    color: #689ce9; 
     }
     
     .form { 
@@ -94,7 +98,7 @@ body {
     display: grid; 
     gap: 6px; 
     font-size: 14px; 
-    color: #cfe2ff; 
+    color: #5d798a; 
     }
     
     input { 
@@ -126,12 +130,69 @@ body {
     }
     
     .btn.danger { 
-    background: #da3633; 
+    background: #ff4643; 
     }
     
     .footer {
     padding: 14px 16px; 
-    border-top: 1px solid #1b2634; 
-    color: #9fb2c8; 
+    border-top: 1px solid #5192e7cc; 
+    color: #000000; 
     text-align: center;
      }
+     /* Container principal do evento */
+.evento-container {
+    border: 2px solid red; /* destaque em vermelho */
+    border-radius: 8px;
+    padding: 16px;
+    margin: 12px 0;
+    background-color: #1a1a1a;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  
+  /* Badge de status */
+  .badge {
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 0.5rem;
+    color: #fff;
+  }
+  
+  .badge.aberto {
+    background-color: #5cb85c;
+  }
+  
+  .badge.lotado {
+    background-color: #d94f4f;
+  }
+  
+  /* Botões */
+  .botoes {
+    margin-top: 10px;
+  }
+  
+  .botoes button {
+    margin-right: 8px;
+    padding: 6px 12px;
+    border: none;
+    background-color: #007bff;
+    color: rgb(0, 0, 0);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .botoes button:hover {
+    background-color: #0056b3;
+  }
+  
+  .stack{
+    color:#04193a;
+  }
+
+  /*mudar cor do botao cancelar */
+  .btn ghost{ 
+    color:#3f9bf1;
+    background: #000000;
+  }

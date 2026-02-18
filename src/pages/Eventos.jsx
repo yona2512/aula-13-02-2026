@@ -22,7 +22,8 @@ export default function Evento({ eventos, onRemover, onRemoverTodos }) {
         placeholder="Buscar evento por título..."
         value={buscaTitulo}
         onChange={(e) => setBuscaTitulo(e.target.value)}
-        style={{ marginBottom: "1rem", padding: "0.5rem" }}
+        style={{ marginBottom: "1rem", padding: "0.5rem", backgroundColor: "lightblue" }}
+
       />
 
       <input
@@ -30,7 +31,8 @@ export default function Evento({ eventos, onRemover, onRemoverTodos }) {
         placeholder="Filtrar por local..."
         value={buscaLocal}
         onChange={(e) => setBuscaLocal(e.target.value)}
-        style={{ marginBottom: "1rem", padding: "0.5rem" }}
+        style={{ marginBottom: "1rem", padding: "0.5rem", backgroundColor: "lightblue" }}
+
       />
       
 {/* Botão remover todos */}
