@@ -26,7 +26,7 @@ export default function CardEvento({ evento, onRemover }) {
     <article
       className="card"
       style={{
-        border: "1px solid #0066ff",
+        border: "4px solid #0066ff",
         borderRadius: "5px",
         padding: "1rem",
         marginBottom: "1rem",
@@ -34,7 +34,8 @@ export default function CardEvento({ evento, onRemover }) {
         justifyContent: "space-between",
         alignItems: "center",
         background:"#7eb2ff",
-        color: "#FFF"
+        color: "#FFF",
+        fontFamily: "Bookman, URW Bookman L, serif"
       }}
     >
       <div>

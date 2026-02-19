@@ -22,7 +22,7 @@ export default function Evento({ eventos, onRemover, onRemoverTodos }) {
         placeholder="Buscar evento por título..."
         value={buscaTitulo}
         onChange={(e) => setBuscaTitulo(e.target.value)}
-        style={{ marginBottom: "1rem", padding: "0.5rem", backgroundColor: "lightblue" }}
+        style={{ marginBottom: "1rem", padding: "0.5rem", backgroundColor: "#e6f7ff", border: "3px solid #007acc",  borderRadius: "8px" }}
 
       />
 
@@ -31,7 +31,7 @@ export default function Evento({ eventos, onRemover, onRemoverTodos }) {
         placeholder="Filtrar por local..."
         value={buscaLocal}
         onChange={(e) => setBuscaLocal(e.target.value)}
-        style={{ marginBottom: "1rem", padding: "0.5rem", backgroundColor: "lightblue" }}
+        style={{ marginBottom: "1rem", padding: "0.5rem", backgroundColor: "#e6f7ff", border: "3px solid #007acc",  borderRadius: "8px" }}
 
       />
       

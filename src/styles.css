@@ -13,21 +13,6 @@ body {
     flex-direction: column; 
     }
     
-    .header { 
-    padding: 16px; 
-    border-bottom: 1px solid #aa7d7d00; 
-    }
-    
-    .header h1 { 
-    margin: 0; 
-    font-size: 20px; 
-    }
-    .sub { 
-    margin: 6px 0 0;
-    color: #000000;
-    font-size: 13px; 
-    }
-    
     .menu { 
     display: flex; 
     gap: 10px; 
@@ -140,7 +125,7 @@ body {
     text-align: center;
      }
      /* Container principal do evento */
-.evento-container {
+    .evento-container {
     border: 2px solid red; /* destaque em vermelho */
     border-radius: 8px;
     padding: 16px;
@@ -191,8 +176,94 @@ body {
     color:#04193a;
   }
 
-  /*mudar cor do botao cancelar */
-  .btn ghost{ 
-    color:#3f9bf1;
-    background: #000000;
+  
+  /*botão cancelar*/
+  .btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
   }
+  
+  .btn.ghost {
+    background-color: #007bff;
+    border: 2px solid transparent;
+    color: #ffffff;
+  }
+  
+  /*barras do cadastro*/
+
+  .form input {
+    background-color: #b1dcff; /* cor de fundo */
+    border: 2px solid #4fbeff;    /* cor da borda */
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #000000;               /* cor do texto */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .form input:focus {
+    border-color: #007bff;     /* cor da borda ao focar */
+    background-color: #fff;    /* cor de fundo ao focar */
+    outline: none;
+  }
+  
+  /*cor dos titulos dos campos de cadastro*/
+
+  .form label {
+    color: #000000; /* cor da letra do label */
+    font-weight: bold; /* deixa o texto do label em negrito */
+  }
+  
+  .form input::placeholder {
+    color: #637c8d; /* cor do texto do placeholder */
+    font-style: italic;
+  }
+  
+ /*estilo do titulo*/
+
+ .header h1 {
+  color: #2c3e50;       /* cor da letra */
+  font-size: 32px;      /* tamanho da fonte */
+  font-weight: bold;    /* deixa em negrito */
+  text-transform: uppercase; /* deixa em maiúsculas */
+  letter-spacing: 2px;  /* espaçamento entre letras */
+  margin-bottom: 8px;   /* espaço abaixo do título */
+}
+
+.header .sub {
+  color: #000000;          /* cor do subtítulo */
+  font-size: 16px;
+  font-style: italic;   /* deixa em itálico */
+}
+
+    .header { 
+    padding: 16px; 
+    }
+    
+    .header h1 { 
+    margin: 0; 
+    font-size: 20px; 
+    color:#000000;
+    font-family: Bookman, URW Bookman L, serif;
+    }
+    .sub { 
+    margin: 6px 0 0;
+    color: #000000;
+    font-size: 13px; 
+    }
+
+    /*titulo Eventos*/
+
+    .stack h2 {
+      color: #000000;       /* cor da letra (DodgerBlue) */
+      font-size: 50px;      /* tamanho da fonte */
+      font-weight: bold;    /* deixa em negrito */
+      text-align: center;   /* centraliza o título */
+      margin-bottom: 1rem;  /* espaço abaixo do título */
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* sombra suave */
+      font-family: "Bookman, URW Bookman L, serif";
+    }
+    
