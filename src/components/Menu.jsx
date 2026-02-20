@@ -1,8 +1,10 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from "react"; //importa o react
+import { NavLink } from "react-router-dom"; //// Importa o NavLink para navegação entre rotas
 
 export default function Menu() {
   return (
+
+      //navegação entre os links
     <nav className="menu">
       <NavLink to="/" className={({ isActive }) => (isActive ? "link active" : "link")}>
         Home

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function CardEvento({ evento, onRemover }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //muda a página através do código
 
   // Valores seguros com fallback
   const status = evento?.status || "desconhecido";
@@ -23,6 +23,7 @@ export default function CardEvento({ evento, onRemover }) {
   };
 
   return (
+    //estilo do card dos eventos
     <article
       className="card"
       style={{
@@ -38,15 +39,24 @@ export default function CardEvento({ evento, onRemover }) {
         fontFamily: "Bookman, URW Bookman L, serif"
       }}
     >
+      {/*informações no card */}
       <div>
+        {/*estilo do titulo e status */}
         <h3 style={{ display: "flex", alignItems: "center" }}>
           {titulo}
+
+          {/*mostra status */}
           <span style={badgeStyle}>{status.toUpperCase()}</span>
         </h3>
 
+        {/*mostra data e local */}
         <p>{data} • {local}</p>
+
+        {/*mostra descrição */}
         {descricao && <p>{descricao}</p>}
 
+
+        {/*botao detalhes */}
         <button
           onClick={() => navigate(`/evento/${evento?.id}`)}
           style={{ marginRight: "0.5rem" }}
@@ -54,6 +64,7 @@ export default function CardEvento({ evento, onRemover }) {
           Ver detalhes
         </button>
 
+        {/*botao editar */}
         <button
           onClick={() => navigate("/cadastrar", { state: { evento } })}
         >
@@ -61,6 +72,7 @@ export default function CardEvento({ evento, onRemover }) {
         </button>
       </div>
 
+      {/*botao remover */}
       <button
         onClick={() => evento?.id && onRemover(evento.id)}
         style={{
