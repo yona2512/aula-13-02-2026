@@ -151,7 +151,7 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
     placeholder="Cole uma URL de foto por linha"
     style={{
       width: "100%",
-      height: "35px",       // altura fixa
+      height: "31px",       // altura fixa
       overflowY: "auto",     // rolagem vertical dentro do campo
       resize: "none",        // impede o usuário de redimensionar
       padding: "0.5rem",
