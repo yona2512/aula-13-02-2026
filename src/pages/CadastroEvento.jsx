@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-// Componente funcional para cadastro e edição de eventos
 export default function CadastroEvento({ onAdd, onUpdate }) {
-  // redireciona o usuário para outra página
   const navigate = useNavigate();
-
-  // Hook para acessar dados já passados (ex: ao clicar em "Editar")
   const location = useLocation();
-
-  // Recupera o evento enviado pela rota, se existir (edição)
   const evento = location.state?.evento;
 
   // Estados do formulário
@@ -18,51 +12,76 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
   const [local, setLocal] = useState(evento?.local || "");
   const [descricao, setDescricao] = useState(evento?.descricao || "");
   const [status, setStatus] = useState(evento?.status || "");
+  const [capacidade, setCapacidade] = useState(evento?.capacidade || "");
+  const [mapa, setMapa] = useState(evento?.mapa || "");
+  const [fotosTexto, setFotosTexto] = useState(evento?.fotos?.join("\n") || "");
 
-  // Função para limpar todos os campos do formulário
+  // Limpar formulário
   const limparFormulario = (e) => {
-    e.preventDefault(); // evita comportamento padrão do botão
+    e.preventDefault();
     setTitulo("");
     setData("");
     setLocal("");
     setDescricao("");
     setStatus("");
+    setCapacidade("");
+    setMapa("");
+    setFotosTexto("");
   };
 
-  // Função ao enviar o formulário
+  // Envio do formulário
   const handleSubmit = (e) => {
-    e.preventDefault(); // previne recarregamento da página toda
+    e.preventDefault();
 
-    // Valida se todos os campos estão preenchidos
-    if (!titulo || !data || !local || !descricao || !status) {
+    if (!titulo || !data || !local || !descricao || !status || !capacidade) {
       alert("Preencha todos os campos.");
       return;
     }
 
-    // Converte o status para minúsculas 
     const statusFormatado = status.toLowerCase();
+    const capacidadeNum = Number(capacidade);
+
+    // Transformar fotosTexto em lista
+    const fotosLista = fotosTexto
+      .split("\n")
+      .map((linha) => linha.trim())
+      .filter((linha) => linha !== "");
 
     if (evento) {
-      // Se existir evento ele atualiza
-      onUpdate(evento.id, { titulo, data, local, descricao, status: statusFormatado });
+      // atualização
+      onUpdate(evento.id, {
+        titulo,
+        data,
+        local,
+        descricao,
+        status: statusFormatado,
+        capacidade: capacidadeNum,
+        mapa,
+        fotos: fotosLista
+      });
     } else {
-      // Se não existir ele adiciona novo evento
-      onAdd({ titulo, data, local, descricao, status: statusFormatado });
+      // novo evento
+      onAdd({
+        titulo,
+        data,
+        local,
+        descricao,
+        status: statusFormatado,
+        capacidade: capacidadeNum,
+        vagasRestantes: capacidadeNum,
+        mapa,
+        fotos: fotosLista
+      });
     }
 
-    // volta para a pagina eventos
     navigate("/evento");
   };
 
   return (
     <section className="stack">
-      {/* Título Editar ou Cadastrar */}
       <h2>{evento ? "Editar Evento" : "Cadastrar Evento"}</h2>
 
-      {/* formulário de cadastro/edição */}
       <form className="form" onSubmit={handleSubmit}>
-
-        {/* Campo Título */}
         <label>
           Título
           <input
@@ -72,17 +91,11 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
           />
         </label>
 
-        {/* Campo Data */}
         <label>
           Data
-          <input
-            type="date"
-            value={data}
-            onChange={(e) => setData(e.target.value)}
-          />
+          <input type="date" value={data} onChange={(e) => setData(e.target.value)} />
         </label>
 
-        {/* Campo Local */}
         <label>
           Local
           <input
@@ -92,7 +105,6 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
           />
         </label>
 
-        {/* Campo Descrição */}
         <label>
           Descrição
           <input
@@ -102,7 +114,6 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
           />
         </label>
 
-        {/* Campo Status */}
         <label>
           Status
           <input
@@ -112,20 +123,52 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
           />
         </label>
 
-        {/* Botões */}
+        <label>
+          Capacidade
+          <input
+            value={capacidade}
+            onChange={(e) => setCapacidade(e.target.value)}
+            placeholder="Ex: 60 pessoas"
+          />
+        </label>
+
+        <label>
+          URL do Mapa
+          <input
+            type="url"
+            value={mapa}
+            onChange={(e) => setMapa(e.target.value)}
+            placeholder="Ex: https://maps.google.com/..."
+          />
+        </label>
+
+        {/* Área de fotos com barra de rolagem */}
+        <label>
+  Fotos (uma por linha)
+  <textarea
+    value={fotosTexto}
+    onChange={(e) => setFotosTexto(e.target.value)}
+    placeholder="Cole uma URL de foto por linha"
+    style={{
+      width: "100%",
+      height: "35px",       // altura fixa
+      overflowY: "auto",     // rolagem vertical dentro do campo
+      resize: "none",        // impede o usuário de redimensionar
+      padding: "0.5rem",
+      boxSizing: "border-box",
+
+      backgroundColor: "#b1dcff", /* cor de fundo */
+      border: "2px solid #4fbeff",      
+      borderRadius: "4px",         // bordas arredondadas
+      }}
+    />
+  </label>
+         
+
         <div className="row">
-          {/* Salvar formulário */}
           <button className="btn" type="submit">Salvar</button>
-
-          {/* Limpar campos */}
-          <button className="btn" type="button" onClick={limparFormulario}>
-            Limpar
-          </button>
-
-          {/* Cancelar e voltar para lista de eventos */}
-          <button className="btn ghost" type="button" onClick={() => navigate("/evento")}>
-            Cancelar
-          </button>
+          <button className="btn" type="button" onClick={limparFormulario}>Limpar</button>
+          <button className="btn ghost" type="button" onClick={() => navigate("/evento")}>Cancelar</button>
         </div>
       </form>
     </section>

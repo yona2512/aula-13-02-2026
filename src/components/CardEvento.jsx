@@ -9,7 +9,6 @@ export default function CardEvento({ evento, onRemover }) {
   const titulo = evento?.titulo || "Sem título";
   const data = evento?.data || "Data não informada";
   const local = evento?.local || "Local não informado";
-  const descricao = evento?.descricao || "";
 
   // Estilo da badge baseado no status (case-insensitive)
   const badgeStyle = {
@@ -52,14 +51,18 @@ export default function CardEvento({ evento, onRemover }) {
         {/*mostra data e local */}
         <p>{data} • {local}</p>
 
-        {/*mostra descrição */}
-        {descricao && <p>{descricao}</p>}
-
 
         {/*botao detalhes */}
         <button
           onClick={() => navigate(`/evento/${evento?.id}`)}
-          style={{ marginRight: "0.5rem" }}
+          style={{ marginRight: "0.5rem",
+            backgroundColor: "#1E90FF",
+            color: "#fff",
+            border: "none",
+            padding: "0.4rem 0.8rem",
+            borderRadius: "4px",
+            cursor: "pointer"}}
+          
         >
           Ver detalhes
         </button>
@@ -67,6 +70,14 @@ export default function CardEvento({ evento, onRemover }) {
         {/*botao editar */}
         <button
           onClick={() => navigate("/cadastrar", { state: { evento } })}
+          style={{
+            backgroundColor: "#1E90FF",
+            color: "#fff",
+            border: "none",
+            padding: "0.4rem 0.8rem",
+            borderRadius: "4px",
+            cursor: "pointer"
+          }}
         >
           Editar
         </button>
