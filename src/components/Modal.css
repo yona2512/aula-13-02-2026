@@ -1,38 +1,42 @@
+/* Fundo que cobre toda a tela*/
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background: #5192e7cc;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  }
-  
-  .modal-close {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #0b3d72;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-  }
-  
-  .modal-close:hover {
-    background-color: #004eb4;
-    transform: scale(1.05);
-  }
+  position: fixed; 
+  top: 0;          
+  left: 0;         
+  width: 100%;     
+  height: 100%;    
+  background: rgba(0,0,0,0.6); 
+  display: flex;  
+  justify-content: center; 
+  align-items: center;     
+  z-index: 1000; /* Fica acima de outros elementos */
+}
+
+/* Caixa do modal  */
+.modal-content {
+  background: #5192e7cc; 
+  padding: 20px;            
+  border-radius: 10px;      
+  max-width: 400px;         
+  text-align: center;       
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+}
+
+/* Botão de fechar */
+.modal-close {
+  margin-top: 15px;         /* Espaço acima */
+  padding: 10px 20px;       /* Tamanho do botão */
+  background-color: #0b3d72; 
+  color: white;            
+  border: none;             
+  border-radius: 8px;       /* Cantos arredondados */
+  cursor: pointer;          /* Muda cursor ao passar */
+  font-weight: bold;        
+  transition: all 0.3s ease; /* Animação suave ao passar o mouse */
+}
+
+/* Efeito quando o mouse passa sobre o botão */
+.modal-close:hover {
+  background-color: #004eb4; 
+  transform: scale(1.05);    /* Aumenta levemente o tamanho */
+}

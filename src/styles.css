@@ -91,7 +91,7 @@ body {
     border-radius: 12px; 
     border: 1px solid #1b2634; 
     background: #0b0f14; 
-    color: #e6edf3; 
+    color: #000000; 
     }
     
     .row { 
@@ -269,69 +269,75 @@ body {
     
     /* CARROSSEL */
 
+/* Container principal do carrossel */
 .carrossel {
-  max-width: 500px;
-  margin: 20px auto;
+  max-width: 500px; 
+  margin: 20px auto; 
 }
 
+/* Caixa que contém as imagens */
 .carrossel-container {
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
+  position: relative; 
+  overflow: hidden;   
+  border-radius: 10px; 
 }
 
+/* Imagem dentro do carrossel */
 .carrossel-img {
-  width: 100%;
-  height: 213px;
-  object-fit: cover;
-  border-radius: 10px;
-  transition: opacity 0.4s ease-in-out;
+  width: 100%;          
+  height: 213px;        
+  object-fit: cover; /* mantém proporção e corta excesso */
+  border-radius: 10px;  
+  transition: opacity 0.4s ease-in-out; 
 }
 
-/* Setas */
+/* Setas para navegar */
 .seta {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
-  border: none;
-  color: white;
-  font-size: 24px;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background 0.3s;
+  position: absolute;   
+  top: 50%;             
+  transform: translateY(-50%); 
+  background: rgba(0, 0, 0, 0.4); 
+  border: none; 
+  color: white; 
+  font-size: 24px; 
+  padding: 8px 12px; 
+  cursor: pointer; 
+  border-radius: 50%; 
+  transition: background 0.3s; /* efeito ao passar mouse */
 }
 
 .seta:hover {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7); /* muda visual ao passar o mouse */
 }
 
+/* Posicionamento das setas */
 .esquerda {
-  left: 10px;
+  left: 10px; /* seta esquerda */
 }
 
 .direita {
-  right: 10px;
+  right: 10px; /* seta direita */
 }
 
-/* Bolinhas */
+/* Container das bolinhas indicadoras */
 .indicadores {
-  text-align: center;
-  margin-top: 10px;
+  text-align: center; /*centraliza bolinhas */
+  margin-top: 10px; 
 }
 
+/* Cada bolinha do carrossel */
 .bolinha {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin: 0 4px;
-  background-color: #bbb;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.3s;
+  display: inline-block; /*elemento que da pra ajustar altura estando na mesma linha*/
+  width: 8px; 
+  height: 8px; 
+  margin: 0 4px; 
+  background-color: #bbb; 
+  border-radius: 50%; 
+  cursor: pointer; 
+  transition: background 0.3s; 
 }
 
+/* Bolinha ativa (imagem atual) */
 .bolinha.ativa {
-  background-color: #222;
+  background-color: #222; 
 }

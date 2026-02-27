@@ -1,32 +1,37 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import Modal from "../components/Modal";
-import "../components/Modal.css";
+import React, { useState } from "react"; //importa React e o useState para criar estados
+import { useNavigate, useLocation } from "react-router-dom"; //Importa funções para navegação
+import Modal from "../components/Modal"; // importa o componente Modal
+import "../components/Modal.css"; //Importa o modal.css
 
+// Componente principal
 export default function CadastroEvento({ onAdd, onUpdate }) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const evento = location.state?.evento;
+  const navigate = useNavigate(); //Permite navegar entre páginas
+  const location = useLocation(); //permite acessar dados enviados
+  const evento = location.state?.evento; //se existir o evento, está editando
 
-  // Estados do formulário
+  //estados do formulário 
   const [titulo, setTitulo] = useState(evento?.titulo || "");
   const [data, setData] = useState(evento?.data || "");
   const [local, setLocal] = useState(evento?.local || "");
   const [descricao, setDescricao] = useState(evento?.descricao || "");
   const [status, setStatus] = useState(evento?.status || "");
   const [capacidade, setCapacidade] = useState(evento?.capacidade || "");
+  
+  // Define vagasRestantes usando valor existente/capacidade
   const [vagasRestantes, setVagasRestantes] = useState(
     evento?.vagasRestantes ?? evento?.capacidade ?? ""
   );
-  const [mapa, setMapa] = useState(evento?.mapa || "");
-  const [fotosTexto, setFotosTexto] = useState(
-    evento?.fotos?.join("\n") || ""
-  );
-  const [showModal, setShowModal] = useState(false);
 
-  // Limpar formulário
+  const [mapa, setMapa] = useState(evento?.mapa || "");
+  
+  // Junta as fotos, separado por quebra de linha
+  const [fotosTexto, setFotosTexto] = useState(evento?.fotos?.join("\n") || "");
+  
+  const [showModal, setShowModal] = useState(false); // Controla exibição do modal
+
+  // Função para limpar todos os campos do formulário
   const limparFormulario = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Evita comportamento padrão
     setTitulo("");
     setData("");
     setLocal("");
@@ -38,34 +43,28 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
     setFotosTexto("");
   };
 
-  // Envio do formulário
+  // Função chamada ao enviar o formulário
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Impede recarregamento da página
 
-    if (
-      !titulo ||
-      !data ||
-      !local ||
-      !descricao ||
-      !status ||
-      !capacidade ||
-      vagasRestantes === ""
-    ) {
+    // Verifica se todos os campos obrigatórios foram preenchidos
+    if (!titulo || !data || !local || !descricao || !status || !capacidade || vagasRestantes === "") {
       alert("Preencha todos os campos.");
-      return;
+      return; //para de executar se faltar algo
     }
 
-    const statusFormatado = status.toLowerCase();
-    const capacidadeNum = Number(capacidade);
-    const vagasNum = Number(vagasRestantes);
+    const statusFormatado = status.toLowerCase(); //deixa o status em minúsculo
+    const capacidadeNum = Number(capacidade); // converte para número
+    const vagasNum = Number(vagasRestantes); //converte para número
 
+    // Transforma o texto das fotos em lista
     const fotosLista = fotosTexto
-      .split("\n")
-      .map((linha) => linha.trim())
-      .filter((linha) => linha !== "");
+      .split("\n") // Separa por linha
+      .map((linha) => linha.trim()) // Remove espaços
+      .filter((linha) => linha !== ""); // Remove linhas vazias
 
     if (evento) {
-      // Atualização
+      // Se já existe evento, atualiza
       onUpdate(evento.id, {
         titulo,
         data,
@@ -78,7 +77,7 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
         fotos: fotosLista,
       });
     } else {
-      // Novo evento
+      // Se não existe, cria novo evento
       onAdd({
         titulo,
         data,
@@ -92,9 +91,10 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
       });
     }
 
-    setShowModal(true);
+    setShowModal(true); // Mostra modal de sucesso
   };
 
+  // Fecha o modal e volta para página de eventos
   const fecharModal = () => {
     setShowModal(false);
     navigate("/evento");
@@ -102,14 +102,16 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
 
   return (
     <section className="stack">
+      {/* Título muda dependendo se está editando ou criando */}
       <h2>{evento ? "Editar Evento" : "Cadastrar Evento"}</h2>
 
+      {/* Formulário */}
       <form className="form" onSubmit={handleSubmit}>
         <label>
           Título
           <input
             value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
+            onChange={(e) => setTitulo(e.target.value)} // Atualiza estado
             placeholder="Ex: Demo do sistema"
           />
         </label>
@@ -199,14 +201,16 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
             }}
           />
         </label>
-
+          {/*botoes */}
         <div className="row">
           <button className="btn" type="submit">
             Salvar
           </button>
+
           <button className="btn" type="button" onClick={limparFormulario}>
             Limpar
           </button>
+
           <button
             className="btn ghost"
             type="button"
@@ -217,6 +221,7 @@ export default function CadastroEvento({ onAdd, onUpdate }) {
         </div>
       </form>
 
+      {/* Modal que aparece após salvar */}
       <Modal isOpen={showModal} onClose={fecharModal}>
         <h3>Evento salvo com sucesso!</h3>
         <p>
