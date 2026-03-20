@@ -1,102 +1,41 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// ✅ (CORREÇÃO) Remova o import do Link porque não está sendo usado.
+// Isso evita o warning do ESLint: "'Link' is defined but never used"
+// import { Link } from "react-router-dom";
 
-export default function CardEvento({ evento, onRemover }) {
-  const navigate = useNavigate(); //muda a página através do código
-
-  // Valores seguros com fallback
-  const status = evento?.status || "desconhecido";
-  const titulo = evento?.titulo || "Sem título";
-  const data = evento?.data || "Data não informada";
-  const local = evento?.local || "Local não informado";
-
-  // Estilo da badge baseado no status (case-insensitive)
-  const badgeStyle = {
-    padding: "0.2rem 0.6rem",
-    borderRadius: "12px",
-    fontSize: "0.8rem",
-    fontWeight: "bold",
-    color: "#fff",
-    backgroundColor: status.toLowerCase() === "aberto" ? "#5cb85c" : "#d9534f",
-    marginLeft: "0.5rem"
-  };
+export default function CardEvento({ evento, onRemover, onEditar }) {
+  // ✅ Badge de status (aberto/lotado)
+  const temVagas = typeof evento.vagasRestantes === "number";
+  const lotado = temVagas && evento.vagasRestantes === 0;
 
   return (
-    //estilo do card dos eventos
-    <article
-      className="card"
-      style={{
-        border: "4px solid #0066ff",
-        borderRadius: "5px",
-        padding: "1rem",
-        marginBottom: "1rem",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        background:"#7eb2ff",
-        color: "#FFF",
-        fontFamily: "Bookman, URW Bookman L, serif"
-      }}
-    >
-      {/*informações no card */}
+    <article className="card">
       <div>
-        {/*estilo do titulo e status */}
-        <h3 style={{ display: "flex", alignItems: "center" }}>
-          {titulo}
+        <h3>{evento.titulo}</h3>
 
-          {/*mostra status */}
-          <span style={badgeStyle}>{status.toUpperCase()}</span>
-        </h3>
+        {/* ✅ Badge aparece só se o evento tiver vagas configuradas */}
+        {temVagas && (
+          <span className={lotado ? "badge lotado" : "badge aberto"}>
+            {lotado ? "LOTADO" : "ABERTO"}
+          </span>
+        )}
 
-        {/*mostra data e local */}
-        <p>{data} • {local}</p>
+        {/* ✅ (CORREÇÃO) Não pode ter <p> dentro de <p>.
+            Troquei a estrutura: um <p> para data/local e outro para descrição (condicional). */}
+        <p className="muted">
+          {evento.data} • {evento.local}
+        </p>
 
-
-        {/*botao detalhes */}
-        <button
-          onClick={() => navigate(`/evento/${evento?.id}`)}
-          style={{ marginRight: "0.5rem",
-            backgroundColor: "#1E90FF",
-            color: "#fff",
-            border: "none",
-            padding: "0.4rem 0.8rem",
-            borderRadius: "4px",
-            cursor: "pointer"}}
-          
-        >
-          Ver detalhes
-        </button>
-
-        {/*botao editar */}
-        <button
-          onClick={() => navigate("/cadastrar", { state: { evento } })}
-          style={{
-            backgroundColor: "#1E90FF",
-            color: "#fff",
-            border: "none",
-            padding: "0.4rem 0.8rem",
-            borderRadius: "4px",
-            cursor: "pointer"
-          }}
-        >
-          Editar
-        </button>
+        {evento.descricao && (
+          <p className="descricao">{evento.descricao}</p>
+        )}
       </div>
 
-      {/*botao remover */}
-      <button
-        onClick={() => evento?.id && onRemover(evento.id)}
-        style={{
-          backgroundColor: "#d9534f",
-          color: "#fff",
-          border: "none",
-          padding: "0.4rem 0.8rem",
-          borderRadius: "4px",
-          cursor: "pointer"
-        }}
-      >
+      {/* ✅ Remover continua igual */}
+      <button className="btn danger" onClick={() => onRemover(evento.id)}>
         Remover
       </button>
     </article>
   );
 }
+ 
