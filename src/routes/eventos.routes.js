@@ -1,27 +1,79 @@
-router.post("/", async (req, res)  => { //rota POST 
-try {
-    //pega os dados enviados da requisição
-    const { id, titulo, data, local, descricao, capacidade, vagas_restantes, mapa_url, status} = req.body;
-    //validar os campos obrigatórios
-    if(!id || !titulo || !data || !local || !descricao || !capacidade || !vagas_restantes || !mapa_url || !status) {
-        return res.status(400).json({error: "Preencha todos os campos"})
-        }
+import express from "express";
+import { pool } from "./db.js";
 
-//Inserir os dados(INSERT) no Banco 
-const r = await pool.query (
-    `INSERT INTO eventos (id, titulo, data, local, descricao, capacidade, vagas_restantes, mapa_url, status) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,  
-    [id, titulo, data, local, descricao, Number(capacidade), vagas_restantes, mapa_url ?? null, status]
+const router = express.Router();
 
-    //o Number(capacidade) garante que seja só numeros
-    //mapa_url ?? null -se ele não tiver valor, salva como null/nulo
-);
-    res.status(201).json(r.rows[0]); //retorna o status como 201 (criado)
+// 🔍 LISTAR EVENTOS
+router.get("/", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM eventos ORDER BY id DESC"
+    );
 
-} catch (error) {                       //se tiver erro, retorna como 500 e com a mensagem de erro
-    res.status(500).json({ erro: "Erro ao criar evento", detalhe: error.message});
-}
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ erro: "Erro ao listar eventos" });
+  }
+});
 
+// ➕ CRIAR EVENTO
+router.post("/", async (req, res) => {
+  try {
+    console.log("BODY:", req.body); // 👈 DEBUG
 
-} //try fecha aqui
-); //final da rota post
+    const {
+      titulo,
+      data,
+      local,
+      descricao,
+      capacidade,
+      vagas_restantes,
+      mapa_url,
+      status
+    } = req.body;
+
+    // validação
+    if (
+      !titulo ||
+      !data ||
+      !local ||
+      !descricao ||
+      capacidade == null ||
+      vagas_restantes == null ||
+      !status
+    ) {
+      return res.status(400).json({
+        erro: "Preencha todos os campos obrigatórios"
+      });
+    }
+
+    const result = await pool.query(
+      `INSERT INTO eventos 
+      (titulo, data, local, descricao, capacidade, vagas_restantes, mapa_url, status)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+      RETURNING *`,
+      [
+        titulo,
+        data,
+        local,
+        descricao,
+        Number(capacidade),
+        Number(vagas_restantes),
+        mapa_url ?? null,
+        status
+      ]
+    );
+
+    res.status(201).json(result.rows[0]);
+
+  } catch (error) {
+    console.error("ERRO:", error);
+    res.status(500).json({
+      erro: "Erro ao criar evento",
+      detalhe: error.message
+    });
+  }
+});
+
+export default router;
